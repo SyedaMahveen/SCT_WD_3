@@ -1,149 +1,195 @@
-const questions = [
+const quizData = [
+
+{
+question:"Which language is used to style web pages?",
+answers:[
+"HTML",
+"CSS",
+"Python",
+"Java"
+],
+correct:1
+},
+
+{
+question:"Which language is used for web interactivity?",
+answers:[
+"C++",
+"JavaScript",
+"SQL",
+"PHP"
+],
+correct:1
+},
+
 {
 question:"What does HTML stand for?",
 answers:[
-{text:"Hyper Text Markup Language", correct:true},
-{text:"High Text Machine Language", correct:false},
-{text:"Hyper Transfer Markup Language", correct:false},
-{text:"Home Tool Markup Language", correct:false}
-]
+"Hyper Text Markup Language",
+"High Text Machine Language",
+"Hyper Transfer Markup Language",
+"Home Tool Markup Language"
+],
+correct:0
 },
 
 {
-question:"Which language is used for styling web pages?",
+question:"Which company developed JavaScript?",
 answers:[
-{text:"HTML", correct:false},
-{text:"CSS", correct:true},
-{text:"Python", correct:false},
-{text:"Java", correct:false}
-]
+"Microsoft",
+"Google",
+"Netscape",
+"Apple"
+],
+correct:2
 },
 
 {
-question:"Which language makes websites interactive?",
+question:"Which CSS property changes text color?",
 answers:[
-{text:"HTML", correct:false},
-{text:"CSS", correct:false},
-{text:"JavaScript", correct:true},
-{text:"SQL", correct:false}
-]
+"font-style",
+"text-color",
+"color",
+"background"
+],
+correct:2
 }
+
 ];
 
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
-
-let currentQuestionIndex = 0;
+let currentQuestion = 0;
 let score = 0;
+let timeLeft = 15;
+let timer;
 
-function startQuiz(){
-currentQuestionIndex = 0;
-score = 0;
-nextButton.innerHTML = "Next";
-showQuestion();
-}
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const resultEl = document.getElementById("result");
+const quizEl = document.getElementById("quiz");
 
-function showQuestion(){
+function loadQuestion(){
 
-resetState();
+clearInterval(timer);
 
-let currentQuestion = questions[currentQuestionIndex];
+timeLeft = 15;
+startTimer();
 
-questionElement.innerHTML =
-(currentQuestionIndex + 1) + ". " +
-currentQuestion.question;
+const q = quizData[currentQuestion];
 
-currentQuestion.answers.forEach(answer => {
+questionEl.textContent = q.question;
 
-const button = document.createElement("button");
+document.getElementById(
+"questionCounter"
+).textContent =
+`Question ${currentQuestion+1}/${quizData.length}`;
 
-button.innerHTML = answer.text;
+document.getElementById(
+"progressBar"
+).style.width =
+`${((currentQuestion+1)/quizData.length)*100}%`;
 
-button.classList.add("btn");
+answersEl.innerHTML="";
 
-answerButtons.appendChild(button);
+q.answers.forEach((answer,index)=>{
 
-if(answer.correct){
-button.dataset.correct = answer.correct;
-}
+const btn=document.createElement("button");
 
-button.addEventListener("click", selectAnswer);
+btn.classList.add("answer-btn");
+
+btn.textContent=answer;
+
+btn.onclick=()=>selectAnswer(index);
+
+answersEl.appendChild(btn);
 
 });
 }
 
-function resetState(){
+function selectAnswer(selected){
 
-nextButton.style.display = "none";
+const correct =
+quizData[currentQuestion].correct;
 
-while(answerButtons.firstChild){
-answerButtons.removeChild(answerButtons.firstChild);
-}
-}
+const buttons =
+document.querySelectorAll(".answer-btn");
 
-function selectAnswer(e){
+buttons.forEach(btn=>btn.disabled=true);
 
-const selectedBtn = e.target;
-
-const isCorrect =
-selectedBtn.dataset.correct === "true";
-
-if(isCorrect){
+if(selected===correct){
 score++;
-selectedBtn.style.background = "green";
-selectedBtn.style.color = "white";
-}else{
-selectedBtn.style.background = "red";
-selectedBtn.style.color = "white";
-}
-
-Array.from(answerButtons.children).forEach(button => {
-
-if(button.dataset.correct === "true"){
-button.style.background = "green";
-button.style.color = "white";
-}
-
-button.disabled = true;
-
-});
-
-nextButton.style.display = "block";
-}
-
-function showScore(){
-
-resetState();
-
-questionElement.innerHTML =
-`Quiz Finished! Your Score: ${score}/${questions.length}`;
-
-nextButton.innerHTML = "Restart";
-nextButton.style.display = "block";
-}
-
-function handleNextButton(){
-
-currentQuestionIndex++;
-
-if(currentQuestionIndex < questions.length){
-showQuestion();
+buttons[selected].classList.add("correct");
 }
 else{
-showScore();
+buttons[selected].classList.add("wrong");
+buttons[correct].classList.add("correct");
 }
 }
 
-nextButton.addEventListener("click", () => {
+function startTimer(){
 
-if(currentQuestionIndex < questions.length){
-handleNextButton();
+document.getElementById("timer").textContent =
+`${timeLeft}s`;
+
+timer=setInterval(()=>{
+
+timeLeft--;
+
+document.getElementById("timer").textContent =
+`${timeLeft}s`;
+
+if(timeLeft===0){
+
+clearInterval(timer);
+
+currentQuestion++;
+
+if(currentQuestion<quizData.length){
+loadQuestion();
 }
 else{
-startQuiz();
+showResult();
+}
+
+}
+
+},1000);
+}
+
+nextBtn.addEventListener("click",()=>{
+
+currentQuestion++;
+
+if(currentQuestion<quizData.length){
+loadQuestion();
+}
+else{
+showResult();
 }
 
 });
 
-startQuiz();
+function showResult(){
+
+quizEl.classList.add("hidden");
+
+resultEl.classList.remove("hidden");
+
+document.getElementById("score").textContent =
+`${score} / ${quizData.length}`;
+
+}
+
+function restartQuiz(){
+
+currentQuestion=0;
+score=0;
+
+resultEl.classList.add("hidden");
+quizEl.classList.remove("hidden");
+
+loadQuestion();
+
+}
+
+loadQuestion();
