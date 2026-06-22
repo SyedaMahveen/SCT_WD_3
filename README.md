@@ -1,24 +1,120 @@
 # SCT_WD_3
 
-# Quiz Game Application
+# 🎯 Quiz Game Application
 
-## Features
-- Multiple choice questions
-- Score calculation
-- Next question navigation
-- Final result display
-- Restart quiz option
+## Task 3 - SkillCraft Technology Web Development Internship
 
-## Technologies Used
-- HTML
-- CSS
-- JavaScript
+This project is an interactive Quiz Game Application developed as part of Task 3 of the SkillCraft Technology Web Development Internship.
 
-## Output
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/53963d4a-3c2e-4bcf-97ed-8554b48d0659" />
+The application presents multiple-choice questions, tracks user progress, includes a countdown timer, calculates scores, and displays results at the end of the quiz.
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/a5e3635b-ccd1-4bb2-be54-b63f720a9276" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/3fb80d69-357d-4f1a-8582-d62cd7751556" />
 
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/93cb109f-ecdf-4698-88e7-cf50ad3580a0" />
+## 🚀 Features
+
+✅ 5 Multiple Choice Questions (MCQs)
+
+✅ Interactive Quiz Interface
+
+✅ Progress Bar
+
+✅ Question Counter
+
+✅ 15-Second Countdown Timer
+
+✅ Automatic Score Calculation
+
+✅ Result Screen
+
+✅ Restart Quiz Functionality
+
+✅ Glassmorphism UI Design
+
+✅ Smooth Animations
+
+✅ Hover Effects
+
+✅ Fully Responsive Layout
+
+✅ Mobile-Friendly Design
+
+
+
+## 🛠️ Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+
+
+
+## 📂 Project Structure
+
+
+SCT_WD_3/
+│
+├── index.html
+├── style.css
+├── script.js
+└── README.md
+
+
+## 🎮 How It Works
+
+1. User starts the quiz.
+2. Questions are displayed one by one.
+3. User selects an answer.
+4. Progress bar updates automatically.
+5. Timer counts down from 15 seconds for each question.
+6. Final score is displayed after completing all questions.
+7. User can restart the quiz anytime.
+
+
+
+## ✨ UI Highlights
+
+- Modern Glassmorphism Design
+- Animated Gradient Background
+- Interactive Buttons
+- Responsive Layout for Mobile and Desktop
+- Smooth User Experience
+
+
+
+## 📚 Learning Outcomes
+
+Through this project, I learned:
+
+- DOM Manipulation using JavaScript
+- Event Handling
+- Dynamic Content Rendering
+- Timer Functions
+- Responsive Web Design
+- CSS Animations & Effects
+- User Interface Development
+- Interactive Web Applications
+
+
+
+## 🎯 Internship
+
+SkillCraft Technology – Web Development Internship
+Task 3
+
+
+## 👩‍💻 Author
+
+**Mahveen Sultana**
+
+
+## Live demo
+
+
+## 📌 Future Enhancements
+
+- More Quiz Categories
+- Difficulty Levels
+- High Score Storage
+- Dark/Light Mode Toggle
+- Sound Effects
+- Randomized Questions
